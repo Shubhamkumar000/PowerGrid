@@ -21,6 +21,9 @@ import { WeatherImpact } from "./pages/WeatherImpact";
 import { BusinessInsights } from "./pages/BusinessInsights";
 import { Chatbot } from "./components/Chatbot";
 
+// ✅ Login Page
+import { LoginSignup } from "./Logincomponents/LoginSignup";
+
 export function App() {
   const [scrollY, setScrollY] = useState(0);
   const [selectedRegion, setSelectedRegion] = useState("Northeast");
@@ -53,6 +56,9 @@ export function App() {
             </div>
           }
         />
+
+        {/* ✅ Login Page */}
+        <Route path="/login" element={<LoginSignup />} />
 
         {/* Dashboard and other pages */}
         <Route

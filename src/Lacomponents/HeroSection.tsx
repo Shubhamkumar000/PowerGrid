@@ -16,9 +16,9 @@ export const HeroSection = ({ scrollY }: { scrollY: number }) => {
 
   const parallaxOffset = scrollY * 0.5;
 
-  const handleGetStarted = () => {
-    navigate('/dashboard'); // Redirect to dashboard
-  };
+ const handleGetStarted = () => {
+  navigate('/login'); // Redirect to login instead of dashboard
+};
 
   return (
     <section className="min-h-screen w-full flex flex-col items-center justify-center relative px-4 pt-24 pb-16">
