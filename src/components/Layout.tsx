@@ -1,7 +1,9 @@
 import { Sidebar } from "./Sidebar"
+import { ReactNode } from "react"
+
 import { Header } from "./Header"
 interface LayoutProps {
-  children: ReactNode
+ children: ReactNode 
   selectedRegion: string
   setSelectedRegion: (region: string) => void
   timeframe: string

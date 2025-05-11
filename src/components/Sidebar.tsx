@@ -7,7 +7,9 @@ import {
   AlertTriangleIcon,
   SettingsIcon,
   HelpCircleIcon,
+  LightbulbIcon, // You can choose a different icon if preferred
 } from "lucide-react"
+
 export const Sidebar = () => {
   const location = useLocation()
   const menuItems = [
@@ -37,6 +39,11 @@ export const Sidebar = () => {
       path: "/risk-alerts",
     },
     {
+      icon: LightbulbIcon, // Icon for Business Insights
+      label: "Business Insights",
+      path: "/insights",
+    },
+    {
       icon: SettingsIcon,
       label: "Settings",
       path: "/settings",
@@ -47,6 +54,7 @@ export const Sidebar = () => {
       path: "/help",
     },
   ]
+
   return (
     <aside className="w-16 md:w-64 bg-white border-r shadow-sm">
       <div className="flex items-center justify-center md:justify-start h-16 border-b px-4">
@@ -60,7 +68,11 @@ export const Sidebar = () => {
           <Link
             key={index}
             to={item.path}
-            className={`flex items-center px-4 py-3 mb-2 rounded-lg text-sm ${location.pathname === item.path ? "bg-blue-100 text-blue-700" : "text-gray-600 hover:bg-gray-100"}`}
+            className={`flex items-center px-4 py-3 mb-2 rounded-lg text-sm ${
+              location.pathname === item.path
+                ? "bg-blue-100 text-blue-700"
+                : "text-gray-600 hover:bg-gray-100"
+            }`}
           >
             <item.icon className="h-5 w-5" />
             <span className="hidden md:inline ml-3">{item.label}</span>
