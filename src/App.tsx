@@ -20,6 +20,8 @@ import { DataUpload } from "./pages/DataUpload";
 import { WeatherImpact } from "./pages/WeatherImpact";
 import { BusinessInsights } from "./pages/BusinessInsights";
 import { Chatbot } from "./components/Chatbot";
+import { Settings } from "./pages/Settings";
+import { Help } from "./pages/Help";
 
 // ✅ Login Page
 import { LoginSignup } from "./Logincomponents/LoginSignup";
@@ -81,19 +83,97 @@ export function App() {
         <Route
           path="/forecasts"
           element={
-            <Forecasts
+            <Layout
               selectedRegion={selectedRegion}
+              setSelectedRegion={setSelectedRegion}
               timeframe={timeframe}
-            />
+              setTimeframe={setTimeframe}
+            >
+              <Forecasts
+                selectedRegion={selectedRegion}
+                timeframe={timeframe}
+              />
+            </Layout>
           }
         />
         <Route
           path="/risk-alerts"
-          element={<RiskAlerts selectedRegion={selectedRegion} />}
+          element={
+            <Layout
+              selectedRegion={selectedRegion}
+              setSelectedRegion={setSelectedRegion}
+              timeframe={timeframe}
+              setTimeframe={setTimeframe}
+            >
+              <RiskAlerts selectedRegion={selectedRegion} />
+            </Layout>
+          }
         />
-        <Route path="/upload" element={<DataUpload />} />
-        <Route path="/weather" element={<WeatherImpact />} />
-        <Route path="/insights" element={<BusinessInsights />} />
+        <Route 
+          path="/upload" 
+          element={
+            <Layout
+              selectedRegion={selectedRegion}
+              setSelectedRegion={setSelectedRegion}
+              timeframe={timeframe}
+              setTimeframe={setTimeframe}
+            >
+              <DataUpload />
+            </Layout>
+          } 
+        />
+        <Route 
+          path="/weather" 
+          element={
+            <Layout
+              selectedRegion={selectedRegion}
+              setSelectedRegion={setSelectedRegion}
+              timeframe={timeframe}
+              setTimeframe={setTimeframe}
+            >
+              <WeatherImpact />
+            </Layout>
+          } 
+        />
+        <Route 
+          path="/insights" 
+          element={
+            <Layout
+              selectedRegion={selectedRegion}
+              setSelectedRegion={setSelectedRegion}
+              timeframe={timeframe}
+              setTimeframe={setTimeframe}
+            >
+              <BusinessInsights />
+            </Layout>
+          } 
+        />
+        <Route 
+          path="/settings" 
+          element={
+            <Layout
+              selectedRegion={selectedRegion}
+              setSelectedRegion={setSelectedRegion}
+              timeframe={timeframe}
+              setTimeframe={setTimeframe}
+            >
+              <Settings />
+            </Layout>
+          } 
+        />
+        <Route 
+          path="/help" 
+          element={
+            <Layout
+              selectedRegion={selectedRegion}
+              setSelectedRegion={setSelectedRegion}
+              timeframe={timeframe}
+              setTimeframe={setTimeframe}
+            >
+              <Help />
+            </Layout>
+          } 
+        />
       </Routes>
     </BrowserRouter>
   );
