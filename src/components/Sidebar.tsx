@@ -16,7 +16,7 @@ export const Sidebar = () => {
     {
       icon: HomeIcon,
       label: "Dashboard",
-      path: "/",
+      path: "/dashboard",
     },
     {
       icon: BarChartIcon,

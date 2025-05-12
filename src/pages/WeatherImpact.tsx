@@ -20,7 +20,7 @@ export const WeatherImpact = () => {
       length: 24,
     },
     (_, i) => ({
-      temperature: 60 + Math.random() * 30,
+      temperature: parseFloat((60 + Math.random() * 30).toFixed(2)),
       demand: 4000 + Math.random() * 2000 + i * 100,
     }),
   )
