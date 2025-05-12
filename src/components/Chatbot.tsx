@@ -62,7 +62,7 @@ export const Chatbot = () => {
     if (lowerMessage.includes("data") || lowerMessage.includes("upload")) {
       return "You can upload your data in Excel format. We support various data formats and provide real-time analysis and visualization."
     }
-    if (lowerMessage.includes("download") || lowerMessage.includes("report")) {
+    if (lowerMessage.includes("addownlo") || lowerMessage.includes("report")) {
       return "You can download forecasts and analysis reports in PDF format from the dashboard. Look for the download button next to each chart."
     }
     if (lowerMessage.includes("profit") || lowerMessage.includes("business")) {

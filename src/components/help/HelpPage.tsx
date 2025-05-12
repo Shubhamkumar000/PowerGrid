@@ -48,9 +48,18 @@ export const HelpPage = () => {
                   </button>
                 </li>
                 <li>
-                  <button onClick={() => setActiveSection('faq')} className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg ${activeSection === 'faq' ? 'bg-blue-50 text-blue-600' : 'text-gray-600 hover:bg-gray-100'}`}>
-                    <HelpCircleIcon size={18} />
-                    <span>Frequently Asked Questions</span>
+                  <button
+                      onClick={() => setActiveSection('faq')}
+                      className={`w-full flex items-center px-4 py-3 rounded-lg overflow-hidden text-ellipsis whitespace-nowrap ${
+                        activeSection === 'faq'
+                          ? 'bg-blue-50 text-blue-600'
+                          : 'text-gray-600 hover:bg-gray-100'
+                      }`}
+                    >
+                      <div className="flex-shrink-0">
+                        <HelpCircleIcon size={18} />
+                      </div>
+                      <span className="ml-3 truncate">Frequently Asked Questions</span>
                   </button>
                 </li>
                 <li>

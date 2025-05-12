@@ -24,7 +24,7 @@ import { Settings } from "./pages/Settings";
 import { Help } from "./pages/Help";
 
 // ✅ Login Page
-import { LoginSignup } from "./Logincomponents/LoginSignup";
+import LoginSignup from "./Logincomponents/LoginSignup";
 
 export function App() {
   const [scrollY, setScrollY] = useState(0);
