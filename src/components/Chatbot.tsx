@@ -1,5 +1,5 @@
 "use client"
-
+import axios from 'axios';
 import { useEffect, useState, useRef } from "react"
 import { MessageCircleIcon, SendIcon, XIcon } from "lucide-react"
 interface Message {
@@ -51,24 +51,32 @@ export const Chatbot = () => {
     }, 1000)
     setInput("")
   }
-  const getBotResponse = (message: string): string => {
+   const getBotResponse = async (message: string):  Promise<string> => {
     const lowerMessage = message.toLowerCase()
-    if (lowerMessage.includes("hello") || lowerMessage.includes("hi")) {
-      return "Hello! How can I assist you with PowerPredict today?"
-    }
-    if (lowerMessage.includes("forecast") || lowerMessage.includes("prediction")) {
-      return "Our AI-powered system provides accurate electricity demand forecasts using historical data, weather patterns, and machine learning algorithms."
-    }
-    if (lowerMessage.includes("data") || lowerMessage.includes("upload")) {
-      return "You can upload your data in Excel format. We support various data formats and provide real-time analysis and visualization."
-    }
-    if (lowerMessage.includes("addownlo") || lowerMessage.includes("report")) {
-      return "You can download forecasts and analysis reports in PDF format from the dashboard. Look for the download button next to each chart."
-    }
-    if (lowerMessage.includes("profit") || lowerMessage.includes("business")) {
-      return "Check our Business Insights page to learn how you can optimize operations and maximize profits using our predictions."
-    }
-    return "I'm here to help with any questions about PowerPredict's features. Feel free to ask about forecasts, data upload, reports, or business insights!"
+    // if (lowerMessage.includes("hello") || lowerMessage.includes("hi")) {
+    //   return "Hello! How can I assist you with PowerPredict today?"
+    // }
+    // if (lowerMessage.includes("forecast") || lowerMessage.includes("prediction")) {
+    //   return "Our AI-powered system provides accurate electricity demand forecasts using historical data, weather patterns, and machine learning algorithms."
+    // }
+    // if (lowerMessage.includes("data") || lowerMessage.includes("upload")) {
+    //   return "You can upload your data in Excel format. We support various data formats and provide real-time analysis and visualization."
+    // }
+    // if (lowerMessage.includes("download") || lowerMessage.includes("report")) {
+    //   return "You can download forecasts and analysis reports in PDF format from the dashboard. Look for the download button next to each chart."
+    // }
+    // if (lowerMessage.includes("profit") || lowerMessage.includes("business")) {
+    //   return "Check our Business Insights page to learn how you can optimize operations and maximize profits using our predictions."
+    // }
+    try {
+    const response = await axios.post('http://127.0.0.1:6969/ask', { question: lowerMessage });
+    console.log(response.data);// Assuming the response contains the bot's reply
+    return response.data.answer; 
+
+    } catch (error) {
+    console.error('Error sending message to bot:', error);
+    //return "I'm here to help with any questions about PowerPredict's features. Feel free to ask about forecasts, data upload, reports, or business insights!";
+  }
   }
   return (
     <div className="fixed bottom-4 right-4 z-50">

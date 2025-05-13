@@ -66,9 +66,10 @@ const ElectricityBackground: React.FC = () => {
           ];
           
           // Random blue/cyan color
-          const blue = 150 + Math.floor(Math.random() * 105);
+          const blue = 255; // Example value if not defined
           const color = `rgba(0, ${150 + Math.floor(Math.random() * 105)}, ${blue}, 0.8)`;
 
+          
           activeConnections.push({
             start: randomPoint,
             end: randomConnection,
