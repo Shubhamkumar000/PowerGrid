@@ -69,13 +69,13 @@ export const Chatbot = () => {
     //   return "Check our Business Insights page to learn how you can optimize operations and maximize profits using our predictions."
     // }
     try {
-    const response = await axios.post('http://127.0.0.1:6969/ask', { question: lowerMessage });
+    const response = await axios.post('https://power-chat-theta.vercel.app/ask', { question: lowerMessage });
     console.log(response.data);// Assuming the response contains the bot's reply
     return response.data.answer; 
 
     } catch (error) {
     console.error('Error sending message to bot:', error);
-    //return "I'm here to help with any questions about PowerPredict's features. Feel free to ask about forecasts, data upload, reports, or business insights!";
+    return "I'm here to help with any questions about PowerPredict's features. Feel free to ask about forecasts, data upload, reports, or business insights!";
   }
   }
   return (
