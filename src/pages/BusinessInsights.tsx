@@ -348,6 +348,26 @@ export const BusinessInsights = () => {
           </div>
         </div>
       </div>
+      <div className="bg-white rounded-lg shadow p-6 mt-6">
+  <h2 className="text-xl font-semibold mb-4">
+    Past Experience: Summer Grid Stress in Northern India
+  </h2>
+  <div className="space-y-3 text-gray-700">
+    <p>
+      <strong>States Affected:</strong> Uttar Pradesh, Haryana, Delhi, Punjab
+    </p>
+    <p>
+      <strong>2023 Data:</strong> Northern region peak demand hit <span className="font-bold text-blue-600">85 GW</span> in June — highest in a decade.
+    </p>
+    <p>
+      <strong>Blackouts:</strong> UP and Haryana rural feeders experienced <span className="font-bold text-red-600">6–8 hour outages</span>.
+    </p>
+    <p>
+      <strong>Cause:</strong> Poor demand anticipation, delayed coal transport, and transformer overheating.
+    </p>
+  </div>
+</div>
+
     </div>
   )
 }

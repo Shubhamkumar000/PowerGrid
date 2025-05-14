@@ -26,7 +26,7 @@ export const NavBar = () => {
         <div className="flex items-center gap-2">
           <Zap className="h-8 w-8 text-blue-500" />
           <span className="text-xl font-bold bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">
-            PowerForecast AI
+            PowerForecast
           </span>
         </div>
         <div className="hidden md:flex items-center gap-8">
