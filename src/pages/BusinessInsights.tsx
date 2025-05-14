@@ -229,28 +229,28 @@ export const BusinessInsights = () => {
           {[
             {
               title: 'Blackout Prevention',
-              value: '95%',
+            //  value: '95%',
               description:
                 'Reduction in unplanned outages through accurate forecasting',
               icon: ZapIcon,
             },
             {
               title: 'Renewable Adoption',
-              value: '40%',
+            //  value: '40%',
               description:
                 'Increased integration of solar and wind energy sources',
               icon: SunIcon,
             },
             {
               title: 'Resource Optimization',
-              value: '₹8.2Cr',
+            //  value: '₹8.2Cr',
               description:
                 'Average annual savings for mid-sized distribution company',
               icon: TrendingUpIcon,
             },
             {
               title: 'Carbon Reduction',
-              value: '3.5M',
+            //  value: '3.5M',
               description: 'Tons of CO₂ emissions avoided annually',
               icon: BatteryChargingIcon,
             },
@@ -263,14 +263,32 @@ export const BusinessInsights = () => {
                 <item.icon className="h-6 w-6 text-blue-600" />
               </div>
               <h3 className="text-lg font-semibold mb-1">{item.title}</h3>
-              <div className="text-3xl font-bold text-blue-600 mb-2">
-                {item.value}
-              </div>
+              
               <p className="text-sm text-gray-600">{item.description}</p>
             </div>
           ))}
         </div>
       </div>
+      <div className="bg-white rounded-lg shadow p-6 mt-6">
+  <h2 className="text-xl font-semibold mb-4">
+    Past Experience: Summer Grid Stress in Northern India
+  </h2>
+  <div className="space-y-3 text-gray-700">
+    <p>
+      <strong>States Affected:</strong> Uttar Pradesh, Haryana, Delhi, Punjab
+    </p>
+    <p>
+      <strong>2023 Data:</strong> Northern region peak demand hit <span className="font-bold text-blue-600">85 GW</span> in June — highest in a decade.
+    </p>
+    <p>
+      <strong>Blackouts:</strong> UP and Haryana rural feeders experienced <span className="font-bold text-red-600">6–8 hour outages</span>.
+    </p>
+    <p>
+      <strong>Cause:</strong> Poor demand anticipation, delayed coal transport, and transformer overheating.
+    </p>
+  </div>
+</div>
+
     </div>
   )
 }

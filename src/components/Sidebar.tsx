@@ -10,8 +10,11 @@ import {
   LightbulbIcon, // You can choose a different icon if preferred
 } from "lucide-react"
 
+import { useNavigate } from "react-router-dom"
+
 export const Sidebar = () => {
   const location = useLocation()
+  const navigate = useNavigate()
   const menuItems = [
     {
       icon: HomeIcon,
@@ -60,7 +63,13 @@ export const Sidebar = () => {
       <div className="flex items-center justify-center md:justify-start h-16 border-b px-4">
         <div className="flex items-center space-x-2">
           <CloudLightningIcon className="h-8 w-8 text-blue-600" />
-          <span className="hidden md:inline text-xl font-bold">PowerPredict</span>
+
+          <span
+      onClick={() => navigate('/')}
+      className="hidden md:inline text-xl font-bold cursor-pointer"
+    >
+      PowerForecast
+    </span>
         </div>
       </div>
       <nav className="mt-6 px-2">
