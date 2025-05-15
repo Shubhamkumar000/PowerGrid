@@ -1,9 +1,10 @@
-import React from 'react';
-import { BrainIcon, BarChart3Icon, SlackIcon, SettingsIcon } from 'lucide-react';
+import React from 'react'
+import { BrainIcon, BarChart3Icon, SlackIcon, SettingsIcon } from 'lucide-react'
 export const ModelSettings = () => {
-  return <div>
-      <h2 className="text-xl font-semibold mb-6">Forecast Model Settings</h2>
-      <div className="space-y-8">
+  return (
+    <div className="w-full bg-white">
+      <h2 className="text-xl font-semibold mb-4">Forecast Model Settings</h2>
+      <div className="space-y-6">
         <div>
           <h3 className="text-lg font-medium mb-4 flex items-center gap-2">
             <BrainIcon size={20} className="text-blue-500" />
@@ -13,7 +14,13 @@ export const ModelSettings = () => {
             <div className="p-4 border rounded-lg">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <input type="radio" name="forecasting-model" id="lstm" className="w-4 h-4 text-blue-600" defaultChecked />
+                  <input
+                    type="radio"
+                    name="forecasting-model"
+                    id="lstm"
+                    className="w-4 h-4 text-blue-600"
+                    defaultChecked
+                  />
                   <div>
                     <label htmlFor="lstm" className="font-medium">
                       LSTM Neural Network
@@ -53,11 +60,109 @@ export const ModelSettings = () => {
                     </select>
                   </div>
                 </div>
+                {/* Additional LSTM parameters */}
+                <div className="mt-4 grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Sequence Length
+                    </label>
+                    <input
+                      type="number"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                      defaultValue="12"
+                      min="1"
+                      max="100"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Split Ratio
+                    </label>
+                    <input
+                      type="number"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                      defaultValue="0.8"
+                      step="0.1"
+                      min="0.5"
+                      max="0.9"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      LSTM Units (Layer 1)
+                    </label>
+                    <input
+                      type="number"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                      defaultValue="100"
+                      step="10"
+                      min="10"
+                      max="500"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      LSTM Units (Layer 2)
+                    </label>
+                    <input
+                      type="number"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                      defaultValue="50"
+                      step="10"
+                      min="10"
+                      max="500"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Dropout Rate
+                    </label>
+                    <input
+                      type="number"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                      defaultValue="0.2"
+                      step="0.1"
+                      min="0"
+                      max="0.9"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Epochs
+                    </label>
+                    <input
+                      type="number"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                      defaultValue="100"
+                      step="10"
+                      min="10"
+                      max="1000"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Batch Size
+                    </label>
+                    <input
+                      type="number"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                      defaultValue="32"
+                      step="8"
+                      min="8"
+                      max="256"
+                    />
+                  </div>
+                </div>
               </div>
             </div>
             <div className="p-4 border rounded-lg">
               <div className="flex items-center gap-3">
-                <input type="radio" name="forecasting-model" id="prophet" className="w-4 h-4 text-blue-600" />
+                <input
+                  type="radio"
+                  name="forecasting-model"
+                  id="prophet"
+                  className="w-4 h-4 text-blue-600"
+                />
                 <div>
                   <label htmlFor="prophet" className="font-medium">
                     Prophet
@@ -82,14 +187,26 @@ export const ModelSettings = () => {
                     <label className="block text-sm font-medium text-gray-700 mb-1">
                       Change Point Prior Scale
                     </label>
-                    <input type="number" className="w-full px-3 py-2 border border-gray-300 rounded-md" defaultValue="0.05" step="0.01" min="0.001" max="0.5" />
+                    <input
+                      type="number"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                      defaultValue="0.05"
+                      step="0.01"
+                      min="0.001"
+                      max="0.5"
+                    />
                   </div>
                 </div>
               </div>
             </div>
             <div className="p-4 border rounded-lg">
               <div className="flex items-center gap-3">
-                <input type="radio" name="forecasting-model" id="ensemble" className="w-4 h-4 text-blue-600" />
+                <input
+                  type="radio"
+                  name="forecasting-model"
+                  id="ensemble"
+                  className="w-4 h-4 text-blue-600"
+                />
                 <div>
                   <label htmlFor="ensemble" className="font-medium">
                     Ensemble Model
@@ -106,19 +223,34 @@ export const ModelSettings = () => {
                   </label>
                   <div className="space-y-2">
                     <label className="flex items-center gap-2">
-                      <input type="checkbox" className="w-4 h-4 text-blue-600" defaultChecked />
+                      <input
+                        type="checkbox"
+                        className="w-4 h-4 text-blue-600"
+                        defaultChecked
+                      />
                       <span className="text-sm">LSTM</span>
                     </label>
                     <label className="flex items-center gap-2">
-                      <input type="checkbox" className="w-4 h-4 text-blue-600" defaultChecked />
+                      <input
+                        type="checkbox"
+                        className="w-4 h-4 text-blue-600"
+                        defaultChecked
+                      />
                       <span className="text-sm">Prophet</span>
                     </label>
                     <label className="flex items-center gap-2">
-                      <input type="checkbox" className="w-4 h-4 text-blue-600" defaultChecked />
+                      <input
+                        type="checkbox"
+                        className="w-4 h-4 text-blue-600"
+                        defaultChecked
+                      />
                       <span className="text-sm">ARIMA</span>
                     </label>
                     <label className="flex items-center gap-2">
-                      <input type="checkbox" className="w-4 h-4 text-blue-600" />
+                      <input
+                        type="checkbox"
+                        className="w-4 h-4 text-blue-600"
+                      />
                       <span className="text-sm">XGBoost</span>
                     </label>
                   </div>
@@ -196,29 +328,53 @@ export const ModelSettings = () => {
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
                 <label className="flex items-center gap-2">
-                  <input type="checkbox" className="w-4 h-4 text-blue-600" defaultChecked />
+                  <input
+                    type="checkbox"
+                    className="w-4 h-4 text-blue-600"
+                    defaultChecked
+                  />
                   <span className="text-sm">Historical Demand</span>
                 </label>
                 <label className="flex items-center gap-2">
-                  <input type="checkbox" className="w-4 h-4 text-blue-600" defaultChecked />
+                  <input
+                    type="checkbox"
+                    className="w-4 h-4 text-blue-600"
+                    defaultChecked
+                  />
                   <span className="text-sm">Temperature</span>
                 </label>
                 <label className="flex items-center gap-2">
-                  <input type="checkbox" className="w-4 h-4 text-blue-600" defaultChecked />
+                  <input
+                    type="checkbox"
+                    className="w-4 h-4 text-blue-600"
+                    defaultChecked
+                  />
                   <span className="text-sm">Humidity</span>
                 </label>
                 <label className="flex items-center gap-2">
-                  <input type="checkbox" className="w-4 h-4 text-blue-600" defaultChecked />
+                  <input
+                    type="checkbox"
+                    className="w-4 h-4 text-blue-600"
+                    defaultChecked
+                  />
                   <span className="text-sm">Day of Week</span>
                 </label>
               </div>
               <div className="space-y-2">
                 <label className="flex items-center gap-2">
-                  <input type="checkbox" className="w-4 h-4 text-blue-600" defaultChecked />
+                  <input
+                    type="checkbox"
+                    className="w-4 h-4 text-blue-600"
+                    defaultChecked
+                  />
                   <span className="text-sm">Holidays</span>
                 </label>
                 <label className="flex items-center gap-2">
-                  <input type="checkbox" className="w-4 h-4 text-blue-600" defaultChecked />
+                  <input
+                    type="checkbox"
+                    className="w-4 h-4 text-blue-600"
+                    defaultChecked
+                  />
                   <span className="text-sm">Special Events</span>
                 </label>
                 <label className="flex items-center gap-2">
@@ -247,7 +403,11 @@ export const ModelSettings = () => {
                 </p>
               </div>
               <label className="relative inline-flex items-center cursor-pointer">
-                <input type="checkbox" className="sr-only peer" defaultChecked />
+                <input
+                  type="checkbox"
+                  className="sr-only peer"
+                  defaultChecked
+                />
                 <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
               </label>
             </div>
@@ -259,7 +419,11 @@ export const ModelSettings = () => {
                 </p>
               </div>
               <label className="relative inline-flex items-center cursor-pointer">
-                <input type="checkbox" className="sr-only peer" defaultChecked />
+                <input
+                  type="checkbox"
+                  className="sr-only peer"
+                  defaultChecked
+                />
                 <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
               </label>
             </div>
@@ -271,17 +435,25 @@ export const ModelSettings = () => {
                 </p>
               </div>
               <label className="relative inline-flex items-center cursor-pointer">
-                <input type="checkbox" className="sr-only peer" defaultChecked />
+                <input
+                  type="checkbox"
+                  className="sr-only peer"
+                  defaultChecked
+                />
                 <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
               </label>
             </div>
           </div>
         </div>
         <div className="flex justify-end pt-4">
-          <button type="submit" className="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700">
+          <button
+            type="submit"
+            className="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700"
+          >
             Save Model Settings
           </button>
         </div>
       </div>
-    </div>;
-};
+    </div>
+  )
+}

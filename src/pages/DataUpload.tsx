@@ -9,93 +9,89 @@ import {
   CloudLightningIcon,
 } from 'lucide-react'
 import { parseExcelFile, generateDataStatistics } from '../utils/excelParser'
+
 export const DataUpload = () => {
   const [dragActive, setDragActive] = useState(false)
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
-  const [uploadStatus, setUploadStatus] = useState<
-    'idle' | 'uploading' | 'success' | 'error'
-  >('idle')
+  const [uploadStatus, setUploadStatus] = useState<'idle' | 'uploading' | 'success' | 'error'>('idle')
   const [uploadProgress, setUploadProgress] = useState(0)
-  const [uploadHistory] = useState([
-    {
-      id: 1,
-      filename: 'june_2023_demand.csv',
-      date: '2023-06-15',
-      status: 'success',
-      records: 720,
-      size: '1.2 MB',
-    },
-    {
-      id: 2,
-      filename: 'weather_data_q2.json',
-      date: '2023-06-14',
-      status: 'success',
-      records: 2160,
-      size: '3.4 MB',
-    },
-    {
-      id: 3,
-      filename: 'may_2023_demand.csv',
-      date: '2023-05-31',
-      status: 'error',
-      records: 0,
-      size: '1.1 MB',
-    },
-  ])
+  const [uploadHistory, setUploadHistory] = useState<any[]>([])
+  const [analyzing, setAnalyzing] = useState(false)
   const [excelData, setExcelData] = useState<any[]>([])
-  const [statistics, setStatistics] = useState<any>(null)
+
   const handleDrag = (e: React.DragEvent) => {
     e.preventDefault()
     e.stopPropagation()
-    if (e.type === 'dragenter' || e.type === 'dragover') {
-      setDragActive(true)
-    } else if (e.type === 'dragleave') {
-      setDragActive(false)
-    }
+    setDragActive(e.type === 'dragenter' || e.type === 'dragover')
   }
+
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault()
     e.stopPropagation()
     setDragActive(false)
     if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-      const file = e.dataTransfer.files[0]
-      handleFile(file)
+      handleFile(e.dataTransfer.files[0])
     }
   }
+
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
-      const file = e.target.files[0]
-      handleFile(file)
+      handleFile(e.target.files[0])
     }
   }
+
   const handleFile = async (file: File) => {
     setSelectedFile(file)
     setUploadStatus('idle')
     setUploadProgress(0)
-    try {
-      const data = await parseExcelFile(file)
-      setExcelData(data)
-      setStatistics(generateDataStatistics(data))
-      setUploadStatus('success')
-    } catch (error) {
-      setUploadStatus('error')
-      console.error('Error parsing file:', error)
-    }
   }
-  const handleUpload = () => {
+
+  const handleUpload = async () => {
     if (!selectedFile) return
     setUploadStatus('uploading')
-    // Simulate upload progress
     let progress = 0
     const interval = setInterval(() => {
       progress += 10
       setUploadProgress(progress)
       if (progress >= 100) {
         clearInterval(interval)
-        setUploadStatus('success')
+        simulateProcessing()
       }
-    }, 300)
+    }, 200)
   }
+
+  const simulateProcessing = async () => {
+    try {
+      setUploadStatus('success')
+      setAnalyzing(true)
+
+      const data = await parseExcelFile(selectedFile!)
+      setExcelData(data)
+
+      // Simulate 5 seconds of analyzing
+      setTimeout(() => {
+        setAnalyzing(false)
+        // Push to uploadHistory
+        setUploadHistory((prev) => [
+          {
+            id: Date.now(),
+            filename: selectedFile!.name,
+            date: new Date().toISOString().slice(0, 10),
+            status: 'success',
+            records: data.length,
+            size: `${(selectedFile!.size / (1024 * 1024)).toFixed(2)} MB`,
+          },
+          ...prev,
+        ])
+        setSelectedFile(null)
+      }, 5000)
+    } catch (error) {
+      console.error('Error parsing file:', error)
+      setUploadStatus('error')
+      setAnalyzing(false)
+    }
+  }
+
   const renderUploadState = () => {
     if (!selectedFile) {
       return (
@@ -126,6 +122,7 @@ export const DataUpload = () => {
         </div>
       )
     }
+
     return (
       <div className="border rounded-lg p-6">
         <div className="flex items-center mb-4">
@@ -136,30 +133,21 @@ export const DataUpload = () => {
               {(selectedFile.size / (1024 * 1024)).toFixed(2)} MB
             </p>
           </div>
-          <button
-            className="text-gray-400 hover:text-gray-600"
-            onClick={() => setSelectedFile(null)}
-          >
+          <button className="text-gray-400 hover:text-gray-600" onClick={() => setSelectedFile(null)}>
             <XIcon className="h-5 w-5" />
           </button>
         </div>
+
         {uploadStatus === 'idle' && (
-          <button
-            className="w-full bg-blue-600 text-white rounded-md px-4 py-2 hover:bg-blue-700"
-            onClick={handleUpload}
-          >
+          <button className="w-full bg-blue-600 text-white rounded-md px-4 py-2 hover:bg-blue-700" onClick={handleUpload}>
             Upload File
           </button>
         )}
+
         {uploadStatus === 'uploading' && (
           <div className="space-y-2">
             <div className="w-full bg-gray-200 rounded-full h-2.5">
-              <div
-                className="bg-blue-600 h-2.5 rounded-full"
-                style={{
-                  width: `${uploadProgress}%`,
-                }}
-              ></div>
+              <div className="bg-blue-600 h-2.5 rounded-full" style={{ width: `${uploadProgress}%` }}></div>
             </div>
             <div className="flex justify-between text-sm text-gray-500">
               <span>Uploading...</span>
@@ -167,14 +155,20 @@ export const DataUpload = () => {
             </div>
           </div>
         )}
-        {uploadStatus === 'success' && (
-          <div className="flex items-center text-green-600">
+
+        {uploadStatus === 'success' && analyzing && (
+          <div className="text-yellow-600 mt-2 font-medium animate-pulse">Analyzing file...</div>
+        )}
+
+        {uploadStatus === 'success' && !analyzing && (
+          <div className="flex items-center text-green-600 mt-2">
             <CheckCircleIcon className="h-5 w-5 mr-2" />
-            <span>Upload successful! Data is being processed.</span>
+            <span>Data processing done!</span>
           </div>
         )}
+
         {uploadStatus === 'error' && (
-          <div className="flex items-center text-red-600">
+          <div className="flex items-center text-red-600 mt-2">
             <XIcon className="h-5 w-5 mr-2" />
             <span>Upload failed. Please try again.</span>
           </div>
@@ -182,47 +176,16 @@ export const DataUpload = () => {
       </div>
     )
   }
+
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-1 gap-6">
         <div className="bg-white rounded-lg shadow p-6">
           <h2 className="text-lg font-semibold mb-4">File Upload</h2>
           {renderUploadState()}
-          {statistics && (
-            <div className="mt-4 p-4 bg-gray-50 rounded-lg">
-              <div className="flex justify-between items-center mb-4">
-                <h3 className="font-medium">Data Statistics</h3>
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <p className="text-sm text-gray-600">Total Records</p>
-                  <p className="text-lg font-semibold">
-                    {statistics.totalRecords}
-                  </p>
-                </div>
-                <div>
-                  <p className="text-sm text-gray-600">Avg Demand</p>
-                  <p className="text-lg font-semibold">
-                    {statistics.avgDemand.toFixed(2)} MW
-                  </p>
-                </div>
-                <div>
-                  <p className="text-sm text-gray-600">Max Demand</p>
-                  <p className="text-lg font-semibold">
-                    {statistics.maxDemand.toFixed(2)} MW
-                  </p>
-                </div>
-                <div>
-                  <p className="text-sm text-gray-600">Min Demand</p>
-                  <p className="text-lg font-semibold">
-                    {statistics.minDemand.toFixed(2)} MW
-                  </p>
-                </div>
-              </div>
-            </div>
-          )}
         </div>
       </div>
+
       <div className="bg-white rounded-lg shadow">
         <div className="p-6 border-b">
           <h2 className="text-lg font-semibold">Upload History</h2>
@@ -241,9 +204,7 @@ export const DataUpload = () => {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center">
                     <FileIcon className="h-4 w-4 text-gray-400 mr-2" />
-                    <span className="text-sm font-medium text-gray-900">
-                      {item.filename}
-                    </span>
+                    <span className="text-sm font-medium text-gray-900">{item.filename}</span>
                   </div>
                   <div className="text-sm text-gray-500">{item.date}</div>
                 </div>
@@ -261,38 +222,19 @@ export const DataUpload = () => {
           ))}
         </div>
       </div>
+
       <div className="bg-white rounded-lg shadow p-6">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-semibold">Data Sources</h2>
-          <button className="text-sm text-blue-600 hover:text-blue-500">
-            Add New Source
-          </button>
+          <button className="text-sm text-blue-600 hover:text-blue-500">Add New Source</button>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {[
-            {
-              name: 'Load API',
-              type: 'Real-time',
-              status: 'Connected',
-              icon: DatabaseIcon,
-            },
-            {
-              name: 'Weather Service',
-              type: 'API',
-              status: 'Connected',
-              icon: CloudLightningIcon,
-            },
-            {
-              name: 'Historical Database',
-              type: 'Database',
-              status: 'Connected',
-              icon: DatabaseIcon,
-            },
+            { name: 'Load API', type: 'Real-time', status: 'Connected', icon: DatabaseIcon },
+            { name: 'Weather Service', type: 'API', status: 'Connected', icon: CloudLightningIcon },
+            { name: 'Historical Database', type: 'Database', status: 'Connected', icon: DatabaseIcon },
           ].map((source, index) => (
-            <div
-              key={index}
-              className="border rounded-lg p-4 flex items-start space-x-4"
-            >
+            <div key={index} className="border rounded-lg p-4 flex items-start space-x-4">
               <div className="bg-blue-100 p-2 rounded-lg">
                 <source.icon className="h-6 w-6 text-blue-600" />
               </div>
