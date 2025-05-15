@@ -10,20 +10,28 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin, setIsLogin, navigate }) =>
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Dummy validation - Replace with real authentication logic
+    // Check if fields are filled
     if ((isLogin || name.trim()) && email.trim() && password.trim()) {
+      // Extra validation for signup
+      if (!isLogin && password !== confirmPassword) {
+        alert('Passwords do not match!');
+        return;
+      }
+
       if (isLogin) {
-        // Simulate login success and navigate
+        // Simulate login success
         navigate('/dashboard');
       } else {
-        // Simulate signup success and switch to login mode
+        // Simulate signup success
         alert(`Signup successful for ${name}! Please log in.`);
         setIsLogin(true);
         setName('');
+        setConfirmPassword('');
       }
     } else {
       alert('Please fill in all required fields.');
@@ -37,13 +45,15 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin, setIsLogin, navigate }) =>
       </h2>
 
       {!isLogin && (
-        <input
-          type="text"
-          placeholder="Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          className="p-2 rounded bg-gray-800 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
+        <>
+          <input
+            type="text"
+            placeholder="Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className="p-2 rounded bg-gray-800 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </>
       )}
 
       <input
@@ -61,6 +71,16 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin, setIsLogin, navigate }) =>
         onChange={(e) => setPassword(e.target.value)}
         className="p-2 rounded bg-gray-800 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
+
+      {!isLogin && (
+        <input
+          type="password"
+          placeholder="Confirm Password"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          className="p-2 rounded bg-gray-800 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      )}
 
       <button
         type="submit"

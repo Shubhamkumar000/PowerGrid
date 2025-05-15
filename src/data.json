@@ -1,0 +1,99 @@
+{
+    "state": "UP",
+    "train_rmse": 57.12,
+    "test_rmse": 60.51,
+    "train_mape": 13.73,
+    "test_mape": 17.46,
+    "forecast": [
+        {
+            "Date": "2020-07-01",
+            "Forecasted_Demand_GWh": 274.9736633300781,
+            "Year": 2020,
+            "Month": "July"
+        },
+        {
+            "Date": "2020-08-01",
+            "Forecasted_Demand_GWh": 291.7135925292969,
+            "Year": 2020,
+            "Month": "August"
+        },
+        {
+            "Date": "2020-09-01",
+            "Forecasted_Demand_GWh": 280.35302734375,
+            "Year": 2020,
+            "Month": "September"
+        },
+        {
+            "Date": "2020-10-01",
+            "Forecasted_Demand_GWh": 279.85418701171875,
+            "Year": 2020,
+            "Month": "October"
+        },
+        {
+            "Date": "2020-11-01",
+            "Forecasted_Demand_GWh": 294.85333251953125,
+            "Year": 2020,
+            "Month": "November"
+        },
+        {
+            "Date": "2020-12-01",
+            "Forecasted_Demand_GWh": 309.3740234375,
+            "Year": 2020,
+            "Month": "December"
+        },
+        {
+            "Date": "2021-01-01",
+            "Forecasted_Demand_GWh": 331.5972595214844,
+            "Year": 2021,
+            "Month": "January"
+        },
+        {
+            "Date": "2021-02-01",
+            "Forecasted_Demand_GWh": 294.00299072265625,
+            "Year": 2021,
+            "Month": "February"
+        },
+        {
+            "Date": "2021-03-01",
+            "Forecasted_Demand_GWh": 309.2264709472656,
+            "Year": 2021,
+            "Month": "March"
+        },
+        {
+            "Date": "2021-04-01",
+            "Forecasted_Demand_GWh": 342.4194641113281,
+            "Year": 2021,
+            "Month": "April"
+        },
+        {
+            "Date": "2021-05-01",
+            "Forecasted_Demand_GWh": 293.1501159667969,
+            "Year": 2021,
+            "Month": "May"
+        },
+        {
+            "Date": "2021-06-01",
+            "Forecasted_Demand_GWh": 284.0707702636719,
+            "Year": 2021,
+            "Month": "June"
+        }
+    ],
+    "monthly_avg_forecast": {
+        "April": 342.4194641113281,
+        "August": 291.7135925292969,
+        "December": 309.3740234375,
+        "February": 294.00299072265625,
+        "January": 331.5972595214844,
+        "July": 274.9736633300781,
+        "June": 284.0707702636719,
+        "March": 309.2264709472656,
+        "May": 293.1501159667969,
+        "November": 294.85333251953125,
+        "October": 279.85418701171875,
+        "September": 280.35302734375
+    },
+    "yearly_avg_forecast": {
+        "2020": 288.5202941894531,
+        "2021": 309.0778503417969
+    }
+}

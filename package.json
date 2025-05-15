@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@types/chart.js": "^2.9.41",
     "@types/xlsx": "^0.0.35",
     "@vitejs/plugin-react": "^4.4.1",
     "autoprefixer": "^10.4.21",
@@ -17,6 +18,8 @@
     "vite": "^6.3.5"
   },
   "dependencies": {
+    "@tailwindcss/forms": "^0.5.10",
+    "@tailwindcss/typography": "^0.5.16",
     "axios": "^1.9.0",
     "lucide-react": "^0.509.0",
     "react-router-dom": "^7.6.0",
